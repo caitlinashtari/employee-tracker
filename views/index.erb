@@ -1,0 +1,26 @@
+<h1>Employee Tracker</h1>
+
+<h1>Add A Division</h1>
+<form action="/divisions" method="post">
+  <div class="form-group form-control">
+    <label for="division_name">Division Name:</label>
+    <input name="division_name">
+  </div>
+  <button type="submit"  class="btn" name="add_division" placeholder="New Division Here">Add Division</button>
+</form>
+
+<h3>Add A Project:</h3>
+
+<form action="/projects" method="post">
+  <label for="division_id">Select A Division</label>
+  <select id="division_id" name="division_id" type="text">
+    <% @divisions.each() do |division| %>
+      <option value="<%= division.id %>"><%= division.name %> </option>
+    <% end %>
+  </select>
+
+  <label for="project_name">Project Name:</label>
+  <input type="text" name="project_name" value="project_name">
+
+  <button type="submit">Add Project</button>
+</form>
