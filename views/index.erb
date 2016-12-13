@@ -1,17 +1,17 @@
-<h1>Employee Tracker</h1>
+<h1 class="jumbotron">Employee Tracker</h1>
 
-<h1>Add A Division</h1>
-<form action="/divisions" method="post">
+<h2>Add A Division</h2>
+<form action="/new_division" method="post">
   <div class="form-group form-control">
     <label for="division_name">Division Name:</label>
-    <input name="division_name">
+    <input name="division_name" placeholder="New Division Here">
   </div>
-  <button type="submit"  class="btn" name="add_division" placeholder="New Division Here">Add Division</button>
+  <button type="submit"  class="btn" name="add_division">Add Division</button>
 </form>
 
 <h3>Add A Project:</h3>
 
-<form action="/projects" method="post">
+<form action="/new_project" method="post">
   <label for="division_id">Select A Division</label>
   <select id="division_id" name="division_id" type="text">
     <% @divisions.each() do |division| %>
@@ -20,7 +20,38 @@
   </select>
 
   <label for="project_name">Project Name:</label>
-  <input type="text" name="project_name" value="project_name">
+  <input type="text" name="project_name" placeholder="New Project Here">
 
   <button type="submit">Add Project</button>
 </form>
+
+<h3>Add an Employee:</h3>
+
+<form action="/new_employee" method="post">
+  <label for="employee_division_id">Select A Division</label>
+  <select id="employee_division_id" name="employee_division_id" type="text">
+    <% @divisions.each() do |division| %>
+      <option value="<%= division.id %>"><%= division.name %> </option>
+    <% end %>
+  </select>
+
+  <label for="employee_name">Employee Name:</label>
+  <input type="text" name="employee_name" placeholder="New Employee Here">
+
+  <button type="submit">Add Employee</button>
+</form>
+<a href="/employees"><button type="button">View All Employees</button></a>
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/ChPerrault.jpg" style="float:right" />
+
+<h2>Divisions:</h2>
+<ul>
+  <% @divisions.each() do |division| %>
+  <li><%= division.name %></li>
+  <% end %>
+</ul>
+<h2>Projects:</h2>
+<ul>
+  <% Project.all.each() do |project| %>
+  <li><%= project.name %>, <%=Division.find(project.division_id).name %></li>
+  <% end %>
+</ul>

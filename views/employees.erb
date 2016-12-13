@@ -1,0 +1,18 @@
+<h1>Employees:</h1>
+<ul>
+  <% @employees.each() do |employee| %>
+    <li>
+      <form action="/employee/<%= employee.id %>" method="post">
+        <%= employee.name() %>
+        <input type="hidden" name="_method" value="patch">
+
+        <select name="project">
+          <% employee.division.projects.each do |project| %>
+            <option value="<%= project.id %>"> <%= project.name %> </option>
+          <% end %>
+        </select>
+        <button type="submit">Assign Project</button>
+      </form>
+    </li>
+  <% end %>
+</ul>
